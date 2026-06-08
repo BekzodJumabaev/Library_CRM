@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Yangi Foydalanuvchi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+<div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Yangi foydalanuvchi qo'shish</h2>
+
+  <form th:action="@{/user/add}" method="post" class="space-y-4">
+    <div>
+      <label class="block text-sm font-medium text-gray-700">To'liq ism</label>
+      <input type="text" name="fullName" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Username</label>
+      <input type="text" name="username" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Parol</label>
+      <input type="password" name="password" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Telefon</label>
+      <input type="text" name="phone" placeholder="+998" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Rol</label>
+      <select name="role" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+        <option value="LIBRARIAN">LIBRARIAN</option>
+        <option value="ADMIN">ADMIN</option>
+      </select>
+    </div>
+
+    <div class="flex items-center justify-between pt-4">
+      <a th:href="@{/user}" class="text-sm text-gray-600 hover:underline">Orqaga qaytish</a>
+      <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">Saqlash</button>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

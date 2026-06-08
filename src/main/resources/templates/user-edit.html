@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tahrirlash</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+<div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+    <div class="text-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-800">Foydalanuvchini tahrirlash</h2>
+        <p class="text-sm text-gray-500 mt-1">ID: <span th:text="${user.id}"></span></p>
+    </div>
+
+    <form th:action="@{/user/edit/{id}(id=${user.id})}" method="post" class="space-y-4">
+        <div>
+            <label class="block text-sm font-medium text-gray-700">To'liq ism</label>
+            <input type="text" name="fullName" th:value="${user.fullName}" required
+                   class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Username</label>
+            <input type="text" name="username" th:value="${user.username}" required
+                   class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Telefon</label>
+            <input type="text" name="phone" th:value="${user.phone}"
+                   class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Rol</label>
+            <select name="role" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                <option value="LIBRARIAN" th:selected="${user.role.name() == 'LIBRARIAN'}">LIBRARIAN</option>
+                <option value="ADMIN" th:selected="${user.role.name() == 'ADMIN'}">ADMIN</option>
+            </select>
+        </div>
+
+        <div class="flex items-center justify-between pt-6">
+            <a th:href="@{/user}" class="text-sm text-gray-500 hover:text-gray-800">Bekor qilish</a>
+            <button type="submit" class="bg-indigo-600 text-white px-8 py-2 rounded-lg font-semibold hover:bg-indigo-700 shadow-md transition">Yangilash</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

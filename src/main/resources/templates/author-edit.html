@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Muallifni tahrirlash</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+<div th:replace="~{fragments :: header}"></div>
+
+<div class="flex items-center justify-center min-h-[80vh]">
+    <div class="bg-white p-10 rounded-3xl shadow-2xl w-full max-w-md border border-gray-100">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-black text-gray-800 tracking-tight">Tahrirlash</h2>
+            <p class="text-[10px] text-gray-400 font-mono mt-2" th:text="'ID: ' + ${author.id}"></p>
+        </div>
+
+        <form th:action="@{/author/edit/{id}(id=${author.id})}" method="post" class="space-y-6">
+            <div>
+                <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2 ml-1">To'liq ism</label>
+                <input type="text" name="fullName" th:value="${author.fullName}" required
+                       class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-orange-100 focus:border-orange-500 transition-all outline-none font-medium">
+            </div>
+
+            <div class="flex items-center justify-between pt-4">
+                <a th:href="@{/author}" class="text-sm font-bold text-gray-400 hover:text-gray-600 transition">Orqaga qaytish</a>
+                <button type="submit" class="bg-orange-500 text-white px-10 py-4 rounded-2xl font-black shadow-lg shadow-orange-100 hover:bg-orange-600 transition transform hover:-translate-y-1">
+                    YANGILASH
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

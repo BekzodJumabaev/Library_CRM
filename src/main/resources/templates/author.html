@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>LibraSoft | Mualliflar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 font-sans">
+<div th:replace="~{fragments :: header}"></div>
+
+<div class="container mx-auto px-4 py-10">
+    <div class="flex justify-between items-end mb-8">
+        <div>
+            <h1 class="text-4xl font-black text-gray-900 tracking-tighter">Mualliflar</h1>
+            <p class="text-gray-500 font-medium">Kitob mualliflarini boshqarish bo'limi</p>
+        </div>
+        <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+           th:href="@{/author/add}" class="bg-pink-600 hover:bg-pink-700 text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-pink-100 transition-all transform hover:-translate-y-1">
+            <i class="fas fa-plus mr-2"></i> Yangi muallif
+        </a>
+    </div>
+
+    <div class="bg-white rounded-3xl shadow-xl shadow-gray-200/50 overflow-hidden border border-gray-100">
+        <table class="min-w-full">
+            <thead class="bg-pink-600">
+            <tr>
+                <th class="px-6 py-4 text-left text-xs font-bold text-white uppercase tracking-widest">ID</th>
+                <th class="px-6 py-4 text-left text-xs font-bold text-white uppercase tracking-widest">To'liq ism (F.I.SH)</th>
+                <th class="px-6 py-5 text-center text-xs font-bold text-white uppercase tracking-widest">Amallar</th>
+            </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+            <tr th:each="author : ${authorDTOList}" class="hover:bg-pink-50/30 transition-colors">
+                <td class="px-6 py-5 text-sm font-mono text-gray-400" th:text="${author.id}"></td>
+                <td class="px-6 py-5 font-bold text-gray-800" th:text="${author.fullName}"></td>
+                <td class="px-6 py-5 text-center space-x-4">
+                    <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+                       th:href="@{/author/edit/{id}(id=${author.id})}" class="text-indigo-600 hover:text-indigo-900 transition">
+                        <i class="fas fa-edit text-lg"></i>
+                    </a>
+
+                    <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+                       th:href="@{/author/delete/{id}(id=${author.id})}" class="text-red-500 hover:text-red-700 transition" onclick="return confirm('O‘chirilsinmi?')">
+                        <i class="fas fa-trash text-lg"></i>
+                    </a>
+
+                    <span th:if="${!#authorization.expression('hasRole(''ADMIN'')')}" class="text-gray-300 text-xs italic">Amallar cheklangan</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

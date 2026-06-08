@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Yangi Kitob Qo'shish</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+<div th:replace="~{fragments :: header}"></div>
+
+<div class="flex items-center justify-center min-h-[85vh]">
+    <div class="bg-white p-10 rounded-3xl shadow-2xl w-full max-w-lg border border-gray-100">
+        <h2 class="text-3xl font-black text-gray-800 mb-8 text-center tracking-tight">📚 Yangi kitob qo'shish</h2>
+
+        <form th:action="@{/book/add}" method="post" class="space-y-5">
+            <div>
+                <label class="block text-xs font-black text-gray-400 uppercase mb-2 ml-1">Kitob nomi (Title)</label>
+                <input type="text" name="title" required class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-orange-100 focus:border-orange-500 transition-all outline-none" placeholder="Masalan: O'tkan kunlar">
+            </div>
+
+            <div>
+                <label class="block text-xs font-black text-gray-400 uppercase mb-2 ml-1">Muallifni tanlang</label>
+                <select name="authorId" required class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-orange-100 focus:border-orange-500 transition-all outline-none">
+                    <option value="" disabled selected>-- Ro'yxatdan tanlang --</option>
+                    <option th:each="author : ${all}" th:value="${author.id}" th:text="${author.fullName}"></option>
+                </select>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-black text-gray-400 uppercase mb-2 ml-1">Soni (Count)</label>
+                    <input type="number" name="count" min="1" required class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-orange-100 focus:border-orange-500 transition-all outline-none" placeholder="10">
+                </div>
+                <div>
+                    <label class="block text-xs font-black text-gray-400 uppercase mb-2 ml-1">Rasm URL</label>
+                    <input type="text" name="imageUrl" class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-orange-100 focus:border-orange-500 transition-all outline-none" placeholder="https://...">
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-6">
+                <a th:href="@{/book}" class="text-sm font-bold text-gray-400 hover:text-gray-600">Bekor qilish</a>
+                <button type="submit" class="bg-orange-500 text-white px-10 py-3 rounded-2xl font-black shadow-lg shadow-orange-100 hover:bg-orange-600 transition transform hover:-translate-y-1">
+                    SAQLASH
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

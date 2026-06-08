@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LibraSoft | Foydalanuvchilar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 font-sans">
+<div th:replace="~{fragments :: header}"></div>
+
+<div class="container mx-auto px-4 py-10">
+  <div class="flex justify-between items-end mb-8">
+    <div>
+      <h1 class="text-4xl font-black text-gray-900 tracking-tighter">Foydalanuvchilar</h1>
+      <p class="text-gray-500 font-medium">Barcha a'zolar va xodimlar boshqaruvi</p>
+    </div>
+    <a th:href="@{/user/add}" class="bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-green-100 transition-all transform hover:-translate-y-1">
+      <i class="fas fa-user-plus mr-2"></i> Ro'yxatdan o'tkazish
+    </a>
+  </div>
+
+  <div class="bg-white rounded-3xl shadow-xl shadow-gray-200/50 overflow-hidden border border-gray-100">
+    <table class="min-w-full">
+      <thead class="bg-green-600">
+      <tr>
+        <th class="px-6 py-4 text-left text-xs font-bold text-white uppercase tracking-widest">F.I.SH & User</th>
+        <th class="px-6 py-4 text-left text-xs font-bold text-white uppercase tracking-widest">Kontakt</th>
+        <th class="px-6 py-4 text-left text-xs font-bold text-white uppercase tracking-widest text-center">Rol</th>
+        <th class="px-6 py-5 text-center text-xs font-bold text-white uppercase tracking-widest">Amallar</th>
+      </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+      <tr th:each="user : ${usersList}" class="hover:bg-green-50/30 transition-colors">
+        <td class="px-6 py-5">
+          <div class="font-black text-gray-900" th:text="${user.fullName}"></div>
+          <div class="text-xs text-gray-400" th:text="'@' + ${user.username}"></div>
+        </td>
+        <td class="px-6 py-5 text-sm font-bold text-gray-600" th:text="${user.phone}"></td>
+        <td class="px-6 py-5 text-center">
+                            <span th:text="${user.role}" class="px-3 py-1 rounded-full text-[10px] font-black tracking-widest"
+                                  th:classappend="${user.role.name() == 'ADMIN' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700'}"></span>
+        </td>
+        <td class="px-6 py-5 text-center space-x-3">
+          <a th:href="@{/user/edit/{id}(id=${user.id})}" class="text-indigo-600 hover:text-indigo-900"><i class="fas fa-edit"></i></a>
+          <a th:href="@{/user/delete/{id}(id=${user.id})}" class="text-red-500 hover:text-red-700" onclick="return confirm('O‘chirilsinmi?')"><i class="fas fa-trash"></i></a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>
